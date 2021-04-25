@@ -1,0 +1,42 @@
+<%- include("_header") -%>
+
+<h1>Sample Form View</h1>
+
+<% if (message === "get") { %>
+    <p>Please enter your information below and submit the form</p>
+<% } else { %>
+    <p>Below is the data you entered</p>
+<% } %>
+
+<form enctype="multipart/form-data" action="/formPost" method="POST">
+    <p>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= data.name %>" required>
+    </p>
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="<%= data.email %>" required placeholder="name@domain">
+    </p>
+    <p>
+        Payment Type:<br>
+        <input type="radio" name="payment" id="cash" value="cash">
+        <label for="cash">Cash</label>
+        <br>
+        <input type="radio" name="payment" id="cc" value="cc">
+        <label for="cc">Credit Card</label>
+        <br>
+        <input type="radio" name="payment" id="gpay" value="gpay">
+        <label for="gpay">Google Pay</label>
+        <br>
+        <input type="radio" name="payment" id="appay" value="appay">
+        <label for="appay">Apple Pay</label>
+    </p>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Cancel">
+</form>
+
+<% if (message === "post") { %>
+    <script>document.getElementById("<%= data.payment %>").checked = true;</script>
+<% } %> 
+
+<%- include("_footer") -%>
